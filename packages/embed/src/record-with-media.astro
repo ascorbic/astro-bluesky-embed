@@ -1,0 +1,15 @@
+---
+import { AppBskyEmbedRecordWithMedia } from "@atproto/api";
+import Media from "./media.astro";
+import Record from "./record.astro";
+
+interface Props {
+  embed: AppBskyEmbedRecordWithMedia.View;
+  postUrl: string;
+}
+
+const { media, record } = Astro.props.embed;
+---
+
+<Media media={media} postUrl={Astro.props.postUrl} />
+<Record embed={record} />

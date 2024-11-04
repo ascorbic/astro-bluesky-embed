@@ -1,0 +1,42 @@
+---
+import type { Post } from "./types";
+import { match, P } from "ts-pattern";
+import {
+  AppBskyEmbedExternal,
+  AppBskyEmbedImages,
+  AppBskyEmbedRecord,
+  AppBskyEmbedRecordWithMedia,
+  AppBskyEmbedVideo,
+} from "@atproto/api";
+import External from "./external.astro";
+import ImageGrid from "./image-grid.astro";
+import RecordWithMedia from "./record-with-media.astro";
+import Video from "./video.astro";
+
+type Props = {
+  media: Post["embed"];
+  postUrl: string;
+};
+---
+
+{
+  match(Astro.props.media)
+    .with(P.when(AppBskyEmbedExternal.isView), (media) => (
+      <External embed={media} />
+    ))
+    .with(P.when(AppBskyEmbedImages.isView), (media) => (
+      <a href={Astro.props.postUrl}>
+        <ImageGrid embed={media} />
+      </a>
+    ))
+    .with(P.when(AppBskyEmbedRecord.isView), (_media) => <div>record</div>)
+    .with(P.when(AppBskyEmbedRecordWithMedia.isView), (media) => (
+      <RecordWithMedia embed={media} postUrl={Astro.props.postUrl} />
+    ))
+    .with(P.when(AppBskyEmbedVideo.isView), (media) => (
+      <a href={Astro.props.postUrl}>
+        <Video embed={media} />
+      </a>
+    ))
+    .otherwise(() => null)
+}

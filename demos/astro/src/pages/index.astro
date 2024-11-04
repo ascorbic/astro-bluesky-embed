@@ -13,11 +13,25 @@ import { BlueskyPost } from "astro-bluesky-embed";
   <body>
     <h1>Astro</h1>
     <!-- Auto layout the elements, wrapping onto new rows as needed -->
-    <div
-      style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}
-    >
-      <BlueskyPost post="https://bsky.app/profile/mk.gg/post/3l7zx4hltw62a" />
-      <BlueskyPost post="https://bsky.app/profile/mk.gg/post/3la2snrsnhd2a" />
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+      <div>
+        <BlueskyPost post="https://bsky.app/profile/mk.gg/post/3l7zx4hltw62a" />
+      </div>
+      <div>
+        <BlueskyPost post="https://bsky.app/profile/mk.gg/post/3la2snrsnhd2a" />
+      </div>
+      <div>
+        <BlueskyPost post="https://bsky.app/profile/mk.gg/post/3la4wuiii4o2e" />
+      </div>
+      <div></div>
+      <div>
+        <BlueskyPost post="https://bsky.app/profile/mk.gg/post/3l7xzeex4vf2m" />
+      </div>
+      <div>
+        <BlueskyPost
+          post="https://bsky.app/profile/wattenberger.com/post/3la54isd7az2i"
+        />
+      </div>
     </div>
   </body>
 </html>

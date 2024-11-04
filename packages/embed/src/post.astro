@@ -1,8 +1,6 @@
 ---
-import { AppBskyEmbedExternal, AppBskyEmbedImages } from "@atproto/api";
 import { renderPostAsHtml, resolvePost } from "./utils.js";
-import ImageGrid from "./image-grid.astro";
-import External from "./external.astro";
+import Media from "./media.astro";
 
 type Props = {
   post: string;
@@ -18,12 +16,8 @@ if (!post) {
 
 const { record, embed, author } = post;
 
-console.log(embed);
-
 const authorUrl = `https://bsky.app/profile/${author?.handle}`;
 
-const images = AppBskyEmbedImages.isView(embed) ? embed : undefined;
-const external = AppBskyEmbedExternal.isView(embed) ? embed : undefined;
 const body = renderPostAsHtml(post);
 ---
 
@@ -48,15 +42,7 @@ const body = renderPostAsHtml(post);
 
     <p class="post-text" set:html={body} />
 
-    {
-      images && (
-        <a href={postUrl}>
-          <ImageGrid embed={images} />
-        </a>
-      )
-    }
-    {external && <External embed={external} />}
-
+    {embed && <Media media={embed} postUrl={postUrl} />}
     <a href="#" class="timestamp">{new Date(record.createdAt ?? "")}</a>
   </div>
 </div>
@@ -93,7 +79,7 @@ const body = renderPostAsHtml(post);
 
   .post-header {
     display: grid;
-    grid-template-columns: 40px 1fr auto auto;
+    grid-template-columns: min-content 1fr min-content;
     gap: 10px;
     align-items: start;
     margin-bottom: 8px;
