@@ -1,0 +1,23 @@
+---
+import { BlueskyPost } from "astro-bluesky-embed";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <h1>Astro</h1>
+    <!-- Auto layout the elements, wrapping onto new rows as needed -->
+    <div
+      style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}
+    >
+      <BlueskyPost post="https://bsky.app/profile/mk.gg/post/3l7zx4hltw62a" />
+      <BlueskyPost post="https://bsky.app/profile/mk.gg/post/3la2snrsnhd2a" />
+    </div>
+  </body>
+</html>
