@@ -12,31 +12,37 @@ import External from "./external.astro";
 import ImageGrid from "./image-grid.astro";
 import RecordWithMedia from "./record-with-media.astro";
 import Video from "./video.astro";
+import Record from "./record.astro";
 
 type Props = {
   media: Post["embed"];
   postUrl: string;
+  compact?: boolean;
 };
+
+const { media, postUrl, compact } = Astro.props;
 ---
 
 {
-  match(Astro.props.media)
-    .with(P.when(AppBskyEmbedExternal.isView), (media) => (
-      <External embed={media} />
+  match(media)
+    .when(AppBskyEmbedExternal.isView, (media) => (
+      <External embed={media} compact={compact} />
     ))
-    .with(P.when(AppBskyEmbedImages.isView), (media) => (
-      <a href={Astro.props.postUrl}>
+    .when(AppBskyEmbedImages.isView, (media) => (
+      <a href={postUrl}>
         <ImageGrid embed={media} />
       </a>
     ))
-    .with(P.when(AppBskyEmbedRecord.isView), (_media) => <div>record</div>)
-    .with(P.when(AppBskyEmbedRecordWithMedia.isView), (media) => (
-      <RecordWithMedia embed={media} postUrl={Astro.props.postUrl} />
+    .when(AppBskyEmbedRecordWithMedia.isView, (media) => (
+      <RecordWithMedia embed={media} postUrl={postUrl} compact={compact} />
     ))
-    .with(P.when(AppBskyEmbedVideo.isView), (media) => (
-      <a href={Astro.props.postUrl}>
+    .when(AppBskyEmbedRecord.isView, (media) => (
+      <Record embed={media} compact={compact} />
+    ))
+    .when(AppBskyEmbedVideo.isView, (media) => (
+      <a href={postUrl}>
         <Video embed={media} />
       </a>
     ))
-    .otherwise(() => null)
+    .otherwise((media) => media?.$type)
 }

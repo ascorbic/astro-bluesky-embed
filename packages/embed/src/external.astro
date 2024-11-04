@@ -3,19 +3,22 @@ import { AppBskyEmbedExternal } from "@atproto/api";
 
 interface Props {
   embed: AppBskyEmbedExternal.View;
+  compact?: boolean;
 }
 
 const { uri, thumb, title, description } = Astro.props.embed.external;
 
 const domain = new URL(uri).hostname;
+
+const { compact } = Astro.props;
 ---
 
 <a href={uri} target="_blank" rel="noopener noreferrer nofollow">
-  <img src={thumb} alt={title} />
+  {compact ? null : <img src={thumb} alt={title} />}
   <div class="content">
     <p class="domain">{domain}</p>
-    <p class="title">{title}</p>
-    <p class="description">{description}</p>
+    {compact ? null : (<p class="title">{title}</p>
+    <p class="description">{description}</p>)}
   </div>
 </a>
 

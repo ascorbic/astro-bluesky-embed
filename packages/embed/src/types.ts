@@ -1,6 +1,5 @@
-import type { PostView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { AppBskyFeedPost } from "@atproto/api";
+import { AppBskyFeedPost, AppBskyFeedDefs } from "@atproto/api";
 
-export interface Post extends PostView {
+export interface Post extends AppBskyFeedDefs.PostView {
   record: AppBskyFeedPost.Record;
 }

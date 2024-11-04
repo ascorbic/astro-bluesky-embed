@@ -73,3 +73,23 @@ export async function resolvePost(
 
   return hydratedPost.data.posts[0] as unknown as Post;
 }
+
+export function atUriToPostUri(atUri: string) {
+  const [, , did, , postId] = atUri.split("/");
+  return `https://bsky.app/profile/${did}/post/${postId}`;
+}
+
+export function atUriToStarterPackUri(atUri: string) {
+  const [, , did, , packId] = atUri.split("/");
+  return `https://bsky.app/starter-pack/${did}/${packId}`;
+}
+
+export function atUriToListUri(atUri: string) {
+  const [, , did, , listId] = atUri.split("/");
+  return `https://bsky.app/profile/${did}/lists/${listId}`;
+}
+
+export function starterPackOgImage(uri: string) {
+  const [, , did, , packId] = uri.split("/");
+  return `https://ogcard.cdn.bsky.app/start/${did}/${packId}`;
+}
