@@ -1,9 +1,5 @@
-## Library template
+# `@astro-community/astro-embed-bluesky`
 
-This is a template for a library.
+This package contains a component for embedding Bluesky posts in Astro projects.
 
-## Usage
-
-```shell
-npm install @ascorbic/example
-```
+[Read the `<BlueskyPost>` component docs](https://astro-embed.netlify.app/components/bluesky/).

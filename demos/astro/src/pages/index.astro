@@ -1,5 +1,6 @@
 ---
 import { BlueskyPost } from "astro-bluesky-embed";
+import post from "../post.json" with { type: "json" };
 ---
 
 <html lang="en">
@@ -12,6 +13,9 @@ import { BlueskyPost } from "astro-bluesky-embed";
   </head>
   <body>
     <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+      <div>
+        <BlueskyPost post={post.data} />
+      </div>
       <div>
         <BlueskyPost post="https://bsky.app/profile/mk.gg/post/3l7zx4hltw62a" />
       </div>
